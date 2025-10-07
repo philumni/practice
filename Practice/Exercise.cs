@@ -10,7 +10,17 @@ public class Exercise
     {
         DoCharsInCommon();
         DoFizzBuzz();
+        DoPalindrome();
 
+    }
+
+    public static void DoPalindrome()
+    {
+        Console.WriteLine("Enter a string to check if it's a palindrome:");
+        string input = Console.ReadLine() ?? "";
+        bool result = isPalindrome(input);
+        Console.WriteLine(result ? "It is a palindrome." : "It is not a palindrome.");
+        Console.ReadLine();
     }
 
     public static void DoCharsInCommon()
@@ -77,7 +87,6 @@ public class Exercise
         // accomodate zero with n + 1 , FizzBuzz(300) should show you "300."
         string[] result = new string[n + 1];
 
-        // we can easily omit zero, if we wanted to.
         for (int j = 0; j <= n; j++)
         {
             string key = "";
@@ -88,7 +97,25 @@ public class Exercise
             result[j] = key;
         }
         return result;
-    }   
-    
+    }
+
+    public static bool isPalindrome(string str)
+    {
+        return innerPalindrome(0, str.Length - 1, str);
+    }
+
+    private static bool innerPalindrome(int leftIndex, int rightIndex, string s)
+    {
+
+        if (s[leftIndex] != s[rightIndex]) return false;
+
+        // covers odd case, even case, and empty string
+        if (leftIndex >= rightIndex) return true;
+
+        leftIndex++;
+        rightIndex--;
+        return innerPalindrome(leftIndex, rightIndex, s);
+    }
+
 
 }
