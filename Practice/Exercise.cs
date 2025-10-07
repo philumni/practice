@@ -11,7 +11,6 @@ public class Exercise
         DoCharsInCommon();
         DoFizzBuzz();
         DoPalindrome();
-
     }
 
     public static void DoPalindrome()
@@ -106,7 +105,6 @@ public class Exercise
 
     private static bool innerPalindrome(int leftIndex, int rightIndex, string s)
     {
-
         if (s[leftIndex] != s[rightIndex]) return false;
 
         // covers odd case, even case, and empty string
@@ -116,6 +114,5 @@ public class Exercise
         rightIndex--;
         return innerPalindrome(leftIndex, rightIndex, s);
     }
-
 
 }
