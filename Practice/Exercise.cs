@@ -144,7 +144,7 @@ public class Exercise
         {
             output += result[j] += ", ";
         }
-        output += result[j];
+        output += result[j] + ".";
         return output;
     }
 
