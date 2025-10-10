@@ -12,6 +12,7 @@ public class Exercise
         DoCharsInCommon();
         DoFizzBuzz();
         DoPalindrome();
+        DoSieveOfEratosthenes();
     }
 
     public static void DoPalindrome()
@@ -39,20 +40,71 @@ public class Exercise
         Console.WriteLine(CharsInCommon(str1, str2));
         Console.ReadLine();
     }
-    
+
     public static void DoFizzBuzz()
     {
         Console.WriteLine("Give us a number (0 to 3000) for FizzBuzz inclusive.");
- 
+
         String num = Console.ReadLine() ?? "";
 
         int n = 0;
         if (num.Length == 0 || !Int32.TryParse(num, out n)) doExit();
-       
+
         if (n < 0 || n > 3000) doExit();
-        
+
         Console.WriteLine(DoFizzBuzzString(DoFizzBuzzMain(n)));
         Console.ReadLine();
+    }
+
+    public static void DoSieveOfEratosthenes()
+    {
+        Console.WriteLine("Give us a number (>=2) to find all primes up to that number.");
+
+        String num = Console.ReadLine() ?? "";
+
+        int n = 0;
+        if (num.Length == 0 || !Int32.TryParse(num, out n)) doExit();
+
+        if (n <= 1) doExit();
+        Console.WriteLine("The prime numbers up to " + n + " are: ");
+        Console.WriteLine(DoSieveOfEratosthenesString(DoSieveOfEratosthenesMain(n)));
+        Console.ReadLine();
+    }
+
+
+    private static string DoSieveOfEratosthenesString(bool[] primes)
+    {
+        int j = 0;
+
+        String output = "";
+        for (; j < primes.Length - 1; j++)
+        {
+            if (primes[j]) output += j + ", ";
+        }
+
+        if (primes[j]) output += "" + j;
+        if (output.EndsWith(", ")) output = output.Substring(0, output.Length - 2);
+        output+= ".";
+        return output;
+    }
+
+    private static bool[] DoSieveOfEratosthenesMain(int n)
+    {
+        bool[] primes = new bool[n + 1];
+        for (int i = 2; i <= n; i++) primes[i] = true;
+
+        for (int p = 2; p * p <= n; p++)
+        {
+            if (primes[p] == true)
+            {
+                for (int i = p * p; i <= n; i += p)
+                    primes[i] = false;
+            }
+        }
+
+        primes[0] = false;
+        primes[1] = false;
+        return primes;
     }
 
 
